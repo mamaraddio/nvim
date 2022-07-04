@@ -49,7 +49,7 @@ return packer.startup(function(use)
 	use "kyazdani42/nvim-web-devicons"					-- File icons
 	use 'rcarriga/nvim-notify'							-- Notification manager
 	use "audibleblink/hackthebox.vim"					-- HackTheBox colorscheme
-	use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = 'MarkdownPreview'}	-- Preview markdown files in browser
+	use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
 	--------------------------------------------------------------------------------------------------------------------------------------------
 
 	-- Automatically set up your configuration after cloning packer.nvim
