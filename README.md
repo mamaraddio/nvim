@@ -6,7 +6,7 @@ __Before you clone this repo please install the following dependencies__
 sudo pacman -S ttf-dejavu xsel node npm yarn 
 ```
 ```bash
-paru -S otf-nerd-fonts-fira-code
+paru -S otf-nerd-fonts-fira-code ripgrep-all
 ```
 ```bash
 pip install pynvim

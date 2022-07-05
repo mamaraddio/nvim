@@ -50,3 +50,9 @@ keymap("v", "<A-k>", ":m .-2<CR>", opts)
 keymap("i", "<A-j>", "<Esc>:m .+1<CR>i", opts)
 keymap("i", "<A-k>", "<Esc>:m .-2<CR>i", opts)
 ----------------------------------------------
+
+--Telescope keybindings
+keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", opts)
+-- keymap("n", "<leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
+keymap("n", "<leader>lg", "<cmd>Telescope live_grep<cr>", opts)
+----------------------------------------------
