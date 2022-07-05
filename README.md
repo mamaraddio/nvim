@@ -1,17 +1,22 @@
 # Nvim
----
 This repo contains my peesonal configuration files for NeoVim written in Lua.
-
+## Requirements:
+__Before you clone this repo please install the following dependencies__
+```bash
+sudo pacman -S ttf-dejavu xsel node npm yarn 
+```
+```bash
+paru -S otf-nerd-fonts-fira-code
+```
+```bash
+pip install pynvim
+```
+```bash
+sudo npm i -g neovim
+```
+## Installation
 To use this conifg files run the following:
 ```bash
 git clone https://github.com/kotvmrc/nvim ~/.config/nvim
 ```
-## Requirements:
-`ttf-dejavu`
-`xsel`
-`node`
-`npm`
-`yarn`
-`fira code nerd font` or patch it from your own
-`pip install pynvim`
-`npm i -g neovim`
+Now run your __nvim__ and waith for the setup.
