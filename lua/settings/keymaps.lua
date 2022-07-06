@@ -1,6 +1,6 @@
 local opts = { noremap = true, silent = true }
 
-local term_opts = { silent = true }
+-- local term_opts = { silent = true }
 
 -- Shorten function name
 local keymap = vim.api.nvim_set_keymap
@@ -45,6 +45,8 @@ keymap("n", "<leader>lg", "<cmd>Telescope live_grep<cr>", opts)
 keymap("n", "<leader>q", ":q<cr>", opts)		-- quit with <space>+q
 keymap("n", "<leader>w", ":w<cr>", opts)		-- save with <space>+w
 keymap("n", "<leader>x", ":x<cr>", opts)		-- save and quit with <space>+x
+-- Gitsigns
+keymap("n", "<leader>gph", ":Gitsigns preview_hunk<CR>", opts)
 
 -- Visual --
 -- Stay in indent mode
@@ -53,6 +55,8 @@ keymap("v", ">", ">gv", opts)
 -- Move text up and down
 keymap("v", "<A-j>", ":m .+1<CR>", opts)
 keymap("v", "<A-k>", ":m .-2<CR>", opts)
+-- Gitsigns
+keymap("v", "<leader>gph", ":Gitsigns preview_hunk<CR>", opts)
 ----------------------------------------------
 
 -- Insert --
