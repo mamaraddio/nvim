@@ -29,7 +29,7 @@ keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 ------------------------------------
-keymap("n", "<leader>f", ":Lexplore<CR>", opts)	-- Toggle NvimTree
+keymap("n", "<leader>f", ":NvimTreeToggle<CR>", opts)	-- Toggle NvimTree
 keymap("n", "<", "<<", opts)							-- de-indent by pressing "<" once
 keymap("n", ">", ">>", opts)							-- indent by pressing ">" once
 -- Move text up and down
