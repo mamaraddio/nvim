@@ -2,7 +2,7 @@ local configs = require("nvim-treesitter.configs")
 configs.setup {
 	ensure_installed = { "bash", "c", "cmake", "comment", "cpp", "css", "dockerfile", "fish", "help", "hjson", "html", "http", "java", "javascript", "jsdoc", "lua", "make",
 						"markdown", "markdown_inline", "python", "regex", "tsx", "typescript", "vim", "yaml"},
-	sync_install = false, 
+	sync_install = false,
 	ignore_install = { "" }, -- List of parsers to ignore installing
 	autopairs = {
 		enable = true,
@@ -36,5 +36,9 @@ configs.setup {
 	max_file_lines = nil, -- Do not enable for files with more than n lines, int
 	-- colors = {}, -- table of hex strings
 	-- termcolors = {} -- table of colour name strings
+	},
+	context_commentstring = {
+		enable = true,
+		enable_autocmd = false,
 	},
 }
