@@ -44,14 +44,15 @@ return packer.startup(function(use)
 	use "wbthomason/packer.nvim" -- Have packer manage itself
 	use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
 	use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
-	use "kyazdani42/nvim-tree.lua"
 
 	--------------------------------------------------------------------------------------------------------------------------------------------
 	use "kyazdani42/nvim-web-devicons" -- File icons
 	use 'rcarriga/nvim-notify' -- Notification manager
 	use "audibleblink/hackthebox.vim" -- HackTheBox colorscheme
+	use "kyazdani42/nvim-tree.lua"
 	use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install",
 		setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
+	use { "akinsho/bufferline.nvim", requires = "moll/vim-bbye" }
 	-- cmp plugins
 	use "hrsh7th/nvim-cmp" -- The completion plugin
 	use "hrsh7th/cmp-buffer" -- buffer completions
