@@ -43,6 +43,7 @@ keymap("n", "<leader>lg", "<cmd>Telescope live_grep<cr>", opts)
 ----------------------------------------------
 -- Quit/Save NeoVim by keymaps
 keymap("n", "<leader>q", ":q<cr>", opts)		-- quit with <space>+q
+keymap("n", "<leader>qq", ":q!<cr>", opts)		-- force quit with <space>+qq
 keymap("n", "<leader>w", ":w<cr>", opts)		-- save with <space>+w
 keymap("n", "<leader>x", ":x<cr>", opts)		-- save and quit with <space>+x
 -- Gitsigns
