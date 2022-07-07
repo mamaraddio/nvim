@@ -53,6 +53,8 @@ return packer.startup(function(use)
 	use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install",
 		setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
 	use { "akinsho/bufferline.nvim", requires = "moll/vim-bbye" }
+	use 'nvim-lualine/lualine.nvim'
+	use "akinsho/toggleterm.nvim"
 	-- cmp plugins
 	use "hrsh7th/nvim-cmp" -- The completion plugin
 	use "hrsh7th/cmp-buffer" -- buffer completions
