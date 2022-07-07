@@ -1,8 +1,6 @@
 -- following options are the default
 -- each of these are documented in `:help nvim-tree.OPTION_NAME`
 
-local icons = require "configs.icons"
-
 -- vim.g.nvim_tree_icons = {
 -- 	default = "",
 -- 	symlink = "",
@@ -36,6 +34,7 @@ if not config_status_ok then
 	return
 end
 
+local icons = require "configs.icons"
 
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
