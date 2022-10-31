@@ -46,3 +46,6 @@ local opts = {
 for k, v in pairs(opts) do
 	vim.opt[k] = v
 end
+
+vim.cmd "set whichwrap+=<,>,[,],h,l"
+vim.cmd [[set iskeyword+=-]]
