@@ -52,9 +52,25 @@ return packer.startup(function(use)
 	use("lewis6991/impatient.nvim")									-- Speedup NeoVim loading times
 	-- use("kyazdani42/nvim-web-devicons")								-- File icons
 	-- use("rcarriga/nvim-notify")										-- Notification manager
+	-- Themes
 	-- use("audibleblink/hackthebox.vim")								-- HackTheBox colorscheme
 	use("martinsione/darkplus.nvim")
 	-- use("folke/tokyonight.nvim")
+	-- End themes
+	-- cmp plugins
+	use("hrsh7th/nvim-cmp")											-- The completion plugin
+	use("hrsh7th/cmp-buffer")										-- buffer completions
+	use("hrsh7th/cmp-path")											-- path completions
+	use("saadparwaiz1/cmp_luasnip")									-- snippet completions
+	use("hrsh7th/cmp-nvim-lsp")
+	use({"hrsh7th/cmp-nvim-lua",
+	 ft = "lua",
+	})
+	-- End cmp
+	-- snippets
+	use("L3MON4D3/LuaSnip")											--snippet engine
+	use("rafamadriz/friendly-snippets")								-- a bunch of snippets to use
+	-- End snippets
 	-- use("numToStr/Comment.nvim")									-- Easily comment stuff
 	-- use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })	-- Syntax Highlighting engine
 	-- use("p00f/nvim-ts-rainbow")
@@ -73,18 +89,6 @@ return packer.startup(function(use)
 	-- use("williamboman/mason-lspconfig.nvim")						-- Mason bindings for lspconfig
 	-- use("jose-elias-alvarez/null-ls.nvim")							-- Null Language Server (for linters and formatters)
 	-- use("RRethy/vim-illuminate")									-- Highlights the word under the cursor
-	-- -- cmp plugins
-	-- use("hrsh7th/nvim-cmp")											-- The completion plugin
-	-- use("hrsh7th/cmp-buffer")										-- buffer completions
-	-- use("hrsh7th/cmp-path")											-- path completions
-	-- use("saadparwaiz1/cmp_luasnip")									-- snippet completions
-	-- use("hrsh7th/cmp-nvim-lsp")
-	-- use({"hrsh7th/cmp-nvim-lua",
-		-- ft = "lua",
-	-- })
-	-- -- snippets
-	-- use("L3MON4D3/LuaSnip")											--snippet engine
-	-- use("rafamadriz/friendly-snippets")								-- a bunch of snippets to use
 	-- use({"iamcco/markdown-preview.nvim",							-- Preview markdown document
 		-- opt = true,
 		-- run = "cd app && npm install",
