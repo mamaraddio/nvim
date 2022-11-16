@@ -58,7 +58,7 @@ keymap("n", "<A-k>", ":m .-2<CR>", opts) -- Move text down
 -- keymap("n", "<Space>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
 -- keymap("n", "<Space>lg", "<cmd>Telescope live_grep<cr>", opts)
 keymap("n", "'", "<End>", opts) -- remap "'" as "$" to go at the end of the line
-keymap("n", "<Space>q", "<cmd>lua require('settings.keymaps').smart_quit()<CR>", opts) -- force quit with <space>+q
+keymap("n", "<Space>q", "<cmd>lua require('user.keymaps').smart_quit()<CR>", opts) -- force quit with <space>+q
 keymap("n", "<Space>c", ":bdelete %<cr>", opts) -- close buffer with <space>+c
 keymap("n", "<Space>w", ":w<cr>", opts) -- save with <space>+w
 keymap("n", "<Space>x", ":x<cr>", opts) -- save and quit with <space>+x
