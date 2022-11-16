@@ -1,5 +1,0 @@
-require 'settings.options'
-require 'settings.keymaps'
-require 'configs.notify'
-require 'settings.plugins'
-require 'settings.colorscheme'
