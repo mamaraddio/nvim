@@ -53,7 +53,7 @@ return packer.startup(function(use)
 	-- use("kyazdani42/nvim-web-devicons")								-- File icons
 	-- use("rcarriga/nvim-notify")										-- Notification manager
 	-- use("audibleblink/hackthebox.vim")								-- HackTheBox colorscheme
-	-- use("martinsione/darkplus.nvim")
+	use("martinsione/darkplus.nvim")
 	-- use("folke/tokyonight.nvim")
 	-- use("numToStr/Comment.nvim")									-- Easily comment stuff
 	-- use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })	-- Syntax Highlighting engine
