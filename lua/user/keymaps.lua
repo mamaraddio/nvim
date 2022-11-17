@@ -53,8 +53,11 @@ keymap("n", "<", "<0", opts) -- de-indent by pressing "<" once and stay in norma
 keymap("n", ">", ">0", opts) -- indent by pressing ">" once and stay in normal_mode
 keymap("n", "<A-j>", ":m .+1<CR>", opts) -- Move text up
 keymap("n", "<A-k>", ":m .-2<CR>", opts) -- Move text down
--- Telescope keybindings
--- keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", opts)
+-- Telescope
+keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
+keymap("n", "<leader>ft", ":Telescope live_grep<CR>", opts)
+keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
+keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 -- keymap("n", "<leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
 -- keymap("n", "<leader>lg", "<cmd>Telescope live_grep<cr>", opts)
 keymap("n", "'", "<End>", opts) -- remap "'" as "$" to go at the end of the line
