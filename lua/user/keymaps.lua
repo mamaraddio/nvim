@@ -22,9 +22,9 @@ function M.smart_quit()
 end
 
 --Remap space as leader key
---[[ keymap("", "<Space>", "<Nop>", opts)
+keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
-vim.g.maplocalleader = " " ]]
+vim.g.maplocalleader = " "
 
 -- Modes
 --   normal_mode = "n",
@@ -48,21 +48,21 @@ keymap("n", "<C-Left>", ":vertical resize +3<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize -3<CR>", opts)
 --
 keymap("n", "--", ":noh<CR>", opts) -- Toggle NvimTree
-keymap("n", "<Space>f", ":NvimTreeToggle<CR>", opts) -- Toggle NvimTree
+keymap("n", "<leader>f", ":NvimTreeToggle<CR>", opts) -- Toggle NvimTree
 keymap("n", "<", "<0", opts) -- de-indent by pressing "<" once and stay in normal_mode
 keymap("n", ">", ">0", opts) -- indent by pressing ">" once and stay in normal_mode
 keymap("n", "<A-j>", ":m .+1<CR>", opts) -- Move text up
 keymap("n", "<A-k>", ":m .-2<CR>", opts) -- Move text down
 -- Telescope keybindings
--- keymap("n", "<Space>ff", "<cmd>Telescope find_files<cr>", opts)
--- keymap("n", "<Space>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
--- keymap("n", "<Space>lg", "<cmd>Telescope live_grep<cr>", opts)
+-- keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", opts)
+-- keymap("n", "<leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
+-- keymap("n", "<leader>lg", "<cmd>Telescope live_grep<cr>", opts)
 keymap("n", "'", "<End>", opts) -- remap "'" as "$" to go at the end of the line
-keymap("n", "<Space>q", "<cmd>lua require('user.keymaps').smart_quit()<CR>", opts) -- force quit with <space>+q
-keymap("n", "<Space>c", ":bdelete %<cr>", opts) -- close buffer with <space>+c
-keymap("n", "<Space>w", ":w<cr>", opts) -- save with <space>+w
-keymap("n", "<Space>x", ":x<cr>", opts) -- save and quit with <space>+x
--- keymap("n", "<Space>gph", ":Gitsigns preview_hunk<CR>", opts) -- Gitsigns
+keymap("n", "<leader>q", "<cmd>lua require('user.keymaps').smart_quit()<CR>", opts) -- force quit with <leader>+q
+keymap("n", "<leader>c", ":bdelete %<cr>", opts) -- close buffer with <leader>+c
+keymap("n", "<leader>w", ":w<cr>", opts) -- save with <leader>+w
+keymap("n", "<leader>x", ":x<cr>", opts) -- save and quit with <leader>+x
+-- keymap("n", "<leader>gph", ":Gitsigns preview_hunk<CR>", opts) -- Gitsigns
 ------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------- Visual -------------------------------------------------------------------------
 keymap("v", "<", "<gv", opts) -- de-indent by pressing "<" once and stay in visual_mode
@@ -72,7 +72,7 @@ keymap("v", "<A-k>", ":m .-2<CR>", opts) -- Move text down
 keymap("v", "p", '"_dP', opts)
 keymap("v", "'", "$", opts) -- remap "'" as "$" to go at the end of the line
 -- Gitsigns
--- keymap("v", "<Space>gph", ":Gitsigns preview_hunk<CR>", opts)
+-- keymap("v", "<leader>gph", ":Gitsigns preview_hunk<CR>", opts)
 ------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------- Insert -------------------------------------------------------------------------
 keymap("i", "<A-j>", "<ESC>:m .+1<CR>i", opts) -- Move text up
