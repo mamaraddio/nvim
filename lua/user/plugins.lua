@@ -71,6 +71,13 @@ return packer.startup(function(use)
 	use("L3MON4D3/LuaSnip")											--snippet engine
 	use("rafamadriz/friendly-snippets")								-- a bunch of snippets to use
 	-- End snippets
+	-- LSP
+	use("neovim/nvim-lspconfig")									-- Enable LSP
+	use("williamboman/mason.nvim")									-- LSP installer
+	use("williamboman/mason-lspconfig.nvim")						-- Mason bindings for lspconfig
+	-- use("jayp0521/mason-null-ls.nvim")
+	-- use("jose-elias-alvarez/null-ls.nvim")							-- Null Language Server (for linters and formatters)
+	-- End LSP
 	-- use("numToStr/Comment.nvim")									-- Easily comment stuff
 	-- use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })	-- Syntax Highlighting engine
 	-- use("p00f/nvim-ts-rainbow")
@@ -84,10 +91,6 @@ return packer.startup(function(use)
 	-- use("akinsho/toggleterm.nvim")
 	-- use("lewis6991/gitsigns.nvim")
 	-- use("gelguy/wilder.nvim")										-- Better `wildmenu` (even command palette)
-	-- use("neovim/nvim-lspconfig")									-- Enable LSP
-	-- use("williamboman/mason.nvim")									-- LSP installer
-	-- use("williamboman/mason-lspconfig.nvim")						-- Mason bindings for lspconfig
-	-- use("jose-elias-alvarez/null-ls.nvim")							-- Null Language Server (for linters and formatters)
 	-- use("RRethy/vim-illuminate")									-- Highlights the word under the cursor
 	-- use({"iamcco/markdown-preview.nvim",							-- Preview markdown document
 		-- opt = true,
