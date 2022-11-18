@@ -57,6 +57,7 @@ return packer.startup(function(use)
 	use("lukas-reineke/indent-blankline.nvim")
 	use("akinsho/toggleterm.nvim")
 	use("ahmedkhalf/project.nvim")
+	use("goolord/alpha-nvim")
 
 	-- Themes
 	use("martinsione/darkplus.nvim")
