@@ -99,14 +99,14 @@ return packer.startup(function(use)
 	use("SmiteshP/nvim-navic")
 
 	-- use("gelguy/wilder.nvim")										-- Better `wildmenu` (even command palette)
-	-- use({"iamcco/markdown-preview.nvim",							-- Preview markdown document
-		-- opt = true,
-		-- run = "cd app && npm install",
-		-- setup = function()
-			-- vim.g.mkdp_filetypes = { "markdown" }
-		-- end,
-		-- ft = { "markdown" },
-	-- })
+	use({"iamcco/markdown-preview.nvim",							-- Preview markdown document
+		opt = true,
+		run = "cd app && npm install",
+		setup = function()
+			vim.g.mkdp_filetypes = { "markdown" }
+		end,
+		ft = { "markdown" },
+	})
 
 	--------------------------------------------------------------------------------------------------------------------------------------------
 	-- Automatically set up your configuration after cloning packer.nvim
