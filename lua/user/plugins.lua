@@ -86,8 +86,8 @@ return packer.startup(function(use)
 	use("p00f/nvim-ts-rainbow")
 	use("windwp/nvim-ts-autotag")
 	use("windwp/nvim-autopairs")
-	-- use("numToStr/Comment.nvim")									-- Easily comment stuff
-	-- use("JoosepAlviste/nvim-ts-context-commentstring")				-- TreeSitter context commentstring
+	use("numToStr/Comment.nvim")									-- Easily comment stuff
+	use("JoosepAlviste/nvim-ts-context-commentstring")				-- TreeSitter context commentstring
 	-- use({ "akinsho/bufferline.nvim", requires = "moll/vim-bbye" })	-- Enable bufferline
 	-- use("lukas-reineke/indent-blankline.nvim")
 
