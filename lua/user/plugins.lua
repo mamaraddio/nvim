@@ -88,12 +88,12 @@ return packer.startup(function(use)
 	use("windwp/nvim-autopairs")
 	use("numToStr/Comment.nvim")									-- Easily comment stuff
 	use("JoosepAlviste/nvim-ts-context-commentstring")				-- TreeSitter context commentstring
-	-- use({ "akinsho/bufferline.nvim", requires = "moll/vim-bbye" })	-- Enable bufferline
-	-- use("lukas-reineke/indent-blankline.nvim")
 
-	-- use("nvim-lualine/lualine.nvim")
-	-- use("akinsho/toggleterm.nvim")
+	-- use({ "akinsho/bufferline.nvim", requires = "moll/vim-bbye" })	-- Enable bufferline
 	use("lewis6991/gitsigns.nvim")
+	use("nvim-lualine/lualine.nvim")
+	-- use("lukas-reineke/indent-blankline.nvim")
+	-- use("akinsho/toggleterm.nvim")
 	-- use("gelguy/wilder.nvim")										-- Better `wildmenu` (even command palette)
 	-- use({"iamcco/markdown-preview.nvim",							-- Preview markdown document
 		-- opt = true,
