@@ -50,9 +50,12 @@ return packer.startup(function(use)
 	use("nvim-lua/popup.nvim")										-- An implementation of the Popup API from vim in Neovim
 	use("nvim-lua/plenary.nvim")									-- Useful lua functions used by lots of plugins
 	use("lewis6991/impatient.nvim")									-- Speedup NeoVim loading times
-	-- use("rcarriga/nvim-notify")										-- Notification manager
+	use("rcarriga/nvim-notify")										-- Notification manager
 	use("kyazdani42/nvim-web-devicons")								-- File icons
+	use("lewis6991/gitsigns.nvim")
 	use("kyazdani42/nvim-tree.lua")									-- File explorer
+	use("lukas-reineke/indent-blankline.nvim")
+	use("akinsho/toggleterm.nvim")
 
 	-- Themes
 	use("martinsione/darkplus.nvim")
@@ -90,11 +93,9 @@ return packer.startup(function(use)
 	use("JoosepAlviste/nvim-ts-context-commentstring")				-- TreeSitter context commentstring
 
 	-- use({ "akinsho/bufferline.nvim", requires = "moll/vim-bbye" })	-- Enable bufferline
-	use("lewis6991/gitsigns.nvim")
 	use("nvim-lualine/lualine.nvim")								-- Status/Buffer/Window line
 	use("SmiteshP/nvim-navic")
-	use("lukas-reineke/indent-blankline.nvim")
-	-- use("akinsho/toggleterm.nvim")
+
 	-- use("gelguy/wilder.nvim")										-- Better `wildmenu` (even command palette)
 	-- use({"iamcco/markdown-preview.nvim",							-- Preview markdown document
 		-- opt = true,
