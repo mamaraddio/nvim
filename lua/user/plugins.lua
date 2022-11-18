@@ -56,6 +56,7 @@ return packer.startup(function(use)
 	use("kyazdani42/nvim-tree.lua")									-- File explorer
 	use("lukas-reineke/indent-blankline.nvim")
 	use("akinsho/toggleterm.nvim")
+	use("ahmedkhalf/project.nvim")
 
 	-- Themes
 	use("martinsione/darkplus.nvim")
