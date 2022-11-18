@@ -82,10 +82,10 @@ return packer.startup(function(use)
 	-- use("jayp0521/mason-null-ls.nvim")
 	use("RRethy/vim-illuminate")									-- Highlights the word under the cursor
 
-	-- use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })	-- Syntax Highlighting engine
-	-- use("p00f/nvim-ts-rainbow")
-	-- use("windwp/nvim-ts-autotag")
-	-- use("windwp/nvim-autopairs")
+	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })	-- Syntax Highlighting engine
+	use("p00f/nvim-ts-rainbow")
+	use("windwp/nvim-ts-autotag")
+	use("windwp/nvim-autopairs")
 	-- use("numToStr/Comment.nvim")									-- Easily comment stuff
 	-- use("JoosepAlviste/nvim-ts-context-commentstring")				-- TreeSitter context commentstring
 	-- use({ "akinsho/bufferline.nvim", requires = "moll/vim-bbye" })	-- Enable bufferline
