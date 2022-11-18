@@ -51,8 +51,8 @@ return packer.startup(function(use)
 	use("nvim-lua/plenary.nvim")									-- Useful lua functions used by lots of plugins
 	use("lewis6991/impatient.nvim")									-- Speedup NeoVim loading times
 	-- use("rcarriga/nvim-notify")										-- Notification manager
-	-- use("kyazdani42/nvim-web-devicons")								-- File icons
-	-- use("kyazdani42/nvim-tree.lua")									-- File explorer
+	use("kyazdani42/nvim-web-devicons")								-- File icons
+	use("kyazdani42/nvim-tree.lua")									-- File explorer
 
 	-- Themes
 	use("martinsione/darkplus.nvim")
