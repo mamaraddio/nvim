@@ -93,7 +93,7 @@ return packer.startup(function(use)
 
 	-- use("nvim-lualine/lualine.nvim")
 	-- use("akinsho/toggleterm.nvim")
-	-- use("lewis6991/gitsigns.nvim")
+	use("lewis6991/gitsigns.nvim")
 	-- use("gelguy/wilder.nvim")										-- Better `wildmenu` (even command palette)
 	-- use({"iamcco/markdown-preview.nvim",							-- Preview markdown document
 		-- opt = true,
