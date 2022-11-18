@@ -82,7 +82,7 @@ return packer.startup(function(use)
 	use("williamboman/mason-lspconfig.nvim")						-- Mason bindings for lspconfig
 	use { "nvim-telescope/telescope.nvim"}							-- Fuzy finder for Neovim
 	use("jose-elias-alvarez/null-ls.nvim")							-- Null Language Server (for linters and formatters)
-	use("jayp0521/mason-null-ls.nvim")
+	-- use("jayp0521/mason-null-ls.nvim")
 	use("RRethy/vim-illuminate")									-- Highlights the word under the cursor
 
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })	-- Syntax Highlighting engine
