@@ -5,20 +5,58 @@ local opts = { noremap = true, silent = true } -- Common options
 
 local M = {}
 
+function M.smart_save()
+	local bufnr = vim.api.nvim_get_current_buf()
+	local bufname = vim.api.nvim_buf_get_name(bufnr)
+	if bufname == "" then
+		vim.ui.input({
+			prompt = "Name of the new buffer: ",
+		}, function(input)
+			if input ~= nil then
+				vim.cmd("w " .. input)
+			else
+				vim.notify("Unable to save. No name provided", "warn")
+			end
+		end)
+	else
+		vim.cmd("w")
+	end
+end
+
 function M.smart_quit()
-  local bufnr = vim.api.nvim_get_current_buf()
-  local modified = vim.api.nvim_buf_get_option(bufnr, "modified")
-  if modified then
-    vim.ui.input({
-      prompt = "You have unsaved changes. Quit anyway? (y/n) ",
-    }, function(input)
-      if input == "y" then
-        vim.cmd "q!"
-      end
-    end)
-  else
-    vim.cmd "q!"
-  end
+	local bufnr = vim.api.nvim_get_current_buf()
+	local modified = vim.api.nvim_buf_get_option(bufnr, "modified")
+	if modified then
+		vim.ui.input({
+			prompt = "You have unsaved changes. Quit anyway? (y/n) ",
+		}, function(input)
+			if input == "y" then
+				vim.cmd("q!")
+			else
+				vim.notify("There are unsaved canges", "warn")
+			end
+		end)
+	else
+		vim.cmd("q!")
+	end
+end
+
+function M.smart_savequit()
+	local bufnr = vim.api.nvim_get_current_buf()
+	local bufname = vim.api.nvim_buf_get_name(bufnr)
+	if bufname == "" then
+		vim.ui.input({
+			prompt = "Name of the new buffer: ",
+		}, function(input)
+			if input ~= nil then
+				vim.cmd("x " .. input)
+			else
+				vim.notify("Unable to save. No name provided", "warn")
+			end
+		end)
+	else
+		vim.cmd("x")
+	end
 end
 
 --Remap space as leader key
@@ -63,8 +101,10 @@ keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 keymap("n", "'", "<End>", opts) -- remap "'" as "$" to go at the end of the line
 keymap("n", "<leader>q", "<cmd>lua require('user.keymaps').smart_quit()<CR>", opts) -- force quit with <leader>+q
 keymap("n", "<leader>c", ":bdelete %<cr>", opts) -- close buffer with <leader>+c
-keymap("n", "<leader>w", ":w<cr>", opts) -- save with <leader>+w
-keymap("n", "<leader>x", ":x<cr>", opts) -- save and quit with <leader>+x
+keymap("n", "<leader>w", "<cmd>lua require('user.keymaps').smart_save()<CR>", opts) -- save with <leader>+w
+-- keymap("n", "<leader>w", ":w<cr>", opts) -- save with <leader>+w
+keymap("n", "<leader>x", "<cmd>lua require('user.keymaps').smart_savequit()<CR>", opts) -- save with <leader>+x
+-- keymap("n", "<leader>x", ":x<cr>", opts) -- save and quit with <leader>+x
 -- keymap("n", "<leader>gph", ":Gitsigns preview_hunk<CR>", opts) -- Gitsigns
 ------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------- Visual -------------------------------------------------------------------------
