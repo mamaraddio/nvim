@@ -22,7 +22,6 @@
 -- 	},
 -- }
 
-
 local status_ok, nvim_tree = pcall(require, "nvim-tree")
 if not status_ok then
 	return
@@ -33,7 +32,7 @@ if not config_status_ok then
 	return
 end
 
-local icons = require "user.icons"
+local icons = require("user.icons")
 
 local function screen_height()
 	while true do
@@ -43,7 +42,7 @@ end
 
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
-nvim_tree.setup {
+nvim_tree.setup({
 	auto_reload_on_write = true,
 	create_in_closed_folder = false,
 	disable_netrw = false,
@@ -74,24 +73,24 @@ nvim_tree.setup {
 			custom_only = false,
 			list = {
 				-- user mappings go here
-				{ key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
-				{ key = "h", cb = tree_cb "close_node" },
-				{ key = "v", cb = tree_cb "vsplit" },
-				{ key = "s", cb = tree_cb "split" },
+				{ key = { "l", "<CR>", "o" }, cb = tree_cb("edit") },
+				{ key = "h", cb = tree_cb("close_node") },
+				{ key = "v", cb = tree_cb("vsplit") },
+				{ key = "s", cb = tree_cb("split") },
 			},
 		},
-        float = {
-          enable = true,
-          quit_on_focus_loss = true,
-          open_win_config = {
-            relative = "editor",
-            border = "rounded",
-            -- width = 10,
-            height = screen_height(),
-            row = 0,
-            col = 0,
-          },
-        },
+		float = {
+			enable = true,
+			quit_on_focus_loss = true,
+			open_win_config = {
+				relative = "editor",
+				border = "rounded",
+				-- width = 10,
+				height = screen_height(),
+				row = 0,
+				col = 0,
+			},
+		},
 	},
 	renderer = {
 		add_trailing = false,
@@ -238,12 +237,12 @@ nvim_tree.setup {
 			watcher = false,
 		},
 	},
-}
+})
 vim.api.nvim_create_autocmd("BufEnter", {
 	nested = true,
 	callback = function()
 		if #vim.api.nvim_list_wins() == 1 and vim.api.nvim_buf_get_name(0):match("NvimTree_") ~= nil then
-			vim.cmd "quit"
+			vim.cmd("quit")
 		end
-	end
+	end,
 })

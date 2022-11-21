@@ -1,5 +1,5 @@
 local opts = {
-	showtabline = 1,				-- always show tabs
+	showtabline = 1, -- always show tabs
 	backup = false, -- creates a backup file
 	clipboard = "unnamedplus", -- allows neovim to access the system clipboard
 	cmdheight = 1, -- more space in the neovim command line for displaying messages
@@ -39,14 +39,12 @@ local opts = {
 	guifont = "monospace:h20", -- the font used in graphical neovim applications
 }
 
-
 -- vim.opt.shortmess:append "c"
-
 
 for k, v in pairs(opts) do
 	vim.opt[k] = v
 end
 
 -- vim.opt.shortmess:append "c"
-vim.cmd "set whichwrap+=<,>,[,],h,l"
-vim.cmd [[set iskeyword+=-]]
+vim.cmd("set whichwrap+=<,>,[,],h,l")
+vim.cmd([[set iskeyword+=-]])

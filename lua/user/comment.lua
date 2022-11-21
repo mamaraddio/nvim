@@ -4,7 +4,7 @@ if not status_ok then
 end
 
 comment.setup({
-	ignore = '^$',
+	ignore = "^$",
 	pre_hook = function(ctx)
 		-- Only calculate commentstring for tsx filetypes
 		if vim.bo.filetype == "typescriptreact" then

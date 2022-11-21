@@ -62,7 +62,7 @@ cmp.setup({
 		}),
 		-- Accept currently selected item. If none selected, `select` first item.
 		-- Set `select` to `false` to only confirm explicitly selected items.
-		["<CR>"] = cmp.mapping.confirm({ select = false}),
+		["<CR>"] = cmp.mapping.confirm({ select = false }),
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
@@ -97,12 +97,12 @@ cmp.setup({
 		format = function(entry, vim_item)
 			vim_item.kind = kind_icons[vim_item.kind]
 			vim_item.menu = ({
-				nvim_lsp = "[ LSP ]",
-				nvim_lua = "[ NVIM ]",
-				luasnip = "[ SNIPPET ]",
-				buffer = "[ BUFFER ]",
-				path = "[ PATH ]",
-				emoji = "[ EMOJI ]",
+				nvim_lsp = "LSP",
+				nvim_lua = "NVIM",
+				luasnip = "SNIPPET",
+				buffer = "BUFFER",
+				path = "PATH",
+				emoji = "EMOJI",
 			})[entry.source.name]
 			return vim_item
 		end,
