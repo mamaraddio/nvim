@@ -90,6 +90,7 @@ return packer.startup(function(use)
 	use("windwp/nvim-ts-autotag")
 	use("windwp/nvim-autopairs")
 	use("numToStr/Comment.nvim") -- Easily comment stuff
+	use("folke/todo-comments.nvim") -- Highlights comment
 	use("JoosepAlviste/nvim-ts-context-commentstring") -- TreeSitter context commentstring
 
 	-- use({ "akinsho/bufferline.nvim", requires = "moll/vim-bbye" })	-- Enable bufferline
