@@ -80,10 +80,10 @@ return packer.startup(function(use)
 	use("neovim/nvim-lspconfig") -- Enable LSP
 	use("williamboman/mason.nvim") -- LSP installer
 	use("williamboman/mason-lspconfig.nvim") -- Mason bindings for lspconfig
-	use({ "nvim-telescope/telescope.nvim" }) -- Fuzy finder for Neovim
 	use("jose-elias-alvarez/null-ls.nvim") -- Null Language Server (for linters and formatters)
 	-- use("jayp0521/mason-null-ls.nvim")
 	use("RRethy/vim-illuminate") -- Highlights the word under the cursor
+	use({ "nvim-telescope/telescope.nvim" }) -- Fuzy finder for Neovim
 
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }) -- Syntax Highlighting engine
 	use("p00f/nvim-ts-rainbow")
