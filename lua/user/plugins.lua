@@ -71,6 +71,7 @@ return packer.startup(function(use)
 	use("hrsh7th/cmp-path") -- path completions
 	use("saadparwaiz1/cmp_luasnip") -- snippet completions
 	use("hrsh7th/cmp-nvim-lsp")
+	use("hrsh7th/cmp-emoji")
 	use({ "hrsh7th/cmp-nvim-lua", ft = "lua" })
 
 	-- snippets

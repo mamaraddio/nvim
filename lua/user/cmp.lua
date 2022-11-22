@@ -98,11 +98,11 @@ cmp.setup({
 			vim_item.kind = kind_icons[vim_item.kind]
 			vim_item.menu = ({
 				nvim_lsp = "LSP",
-				nvim_lua = "NVIM",
-				luasnip = "SNIPPET",
-				buffer = "BUFFER",
-				path = "PATH",
-				emoji = "EMOJI",
+				nvim_lua = "Nvim",
+				luasnip = "Snippet",
+				buffer = "Buffer",
+				path = "Path",
+				emoji = "Emoji",
 			})[entry.source.name]
 			return vim_item
 		end,
@@ -113,6 +113,7 @@ cmp.setup({
 		{ name = "luasnip" },
 		{ name = "buffer" },
 		{ name = "path" },
+		{ name = "emoji" },
 	},
 	confirm_opts = {
 		behavior = cmp.ConfirmBehavior.Replace,
