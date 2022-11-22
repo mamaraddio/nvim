@@ -15,7 +15,7 @@ function M.smart_save()
 			if input ~= nil then
 				vim.cmd("w " .. input)
 			else
-				vim.notify("Unable to save. No name provided", "warn")
+				vim.notify("Unable to save. No name provided", "warn", { title = "SmartSave" })
 			end
 		end)
 	else
@@ -26,18 +26,19 @@ end
 function M.smart_quit()
 	local bufnr = vim.api.nvim_get_current_buf()
 	local modified = vim.api.nvim_buf_get_option(bufnr, "modified")
+	local bufname = vim.fs.basename(vim.api.nvim_buf_get_name(bufnr))
 	if modified then
-		vim.ui.input({
-			prompt = "You have unsaved changes. Quit anyway? (y/n) ",
-		}, function(input)
-			if input == "y" then
-				vim.cmd("q!")
-			else
-				vim.notify("There are unsaved canges", "warn")
-			end
-		end)
+		local answer =
+			vim.fn.confirm('You have unsaved changes to "' .. bufname .. '". Quit anyway?', "&No\n&yes\n&save")
+		if answer == 2 then
+			vim.cmd("q!")
+		elseif answer == 3 then
+			require("user.keymaps").smart_savequit()
+		else
+			vim.notify("There are unsaved canges", "warn", { title = "SmartQuit" })
+		end
 	else
-		vim.cmd("q!")
+		vim.cmd("q")
 	end
 end
 
@@ -51,7 +52,7 @@ function M.smart_savequit()
 			if input ~= nil then
 				vim.cmd("x " .. input)
 			else
-				vim.notify("Unable to save. No name provided", "warn")
+				vim.notify("Unable to save. No name provided", "warn", { title = "SmartSaveQuit" })
 			end
 		end)
 	else
