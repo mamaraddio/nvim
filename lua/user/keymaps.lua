@@ -1,62 +1,49 @@
+local M = {}
 local keymap = vim.keymap.set -- Shorten function name
-
 local opts = { noremap = true, silent = true } -- Common options
 -- local term_opts = { silent = true }
 
-local M = {}
-
-function M.smart_save()
-	local bufnr = vim.api.nvim_get_current_buf()
-	local bufname = vim.api.nvim_buf_get_name(bufnr)
+local api = vim.api
+local function smart_save_quit(bufname, cmd)
 	if bufname == "" then
 		vim.ui.input({
-			prompt = "Name of the new buffer: ",
+			prompt = "CWD: " .. vim.fn.getcwd() .. "\nName of the new buffer: ",
 		}, function(input)
 			if input ~= nil then
-				vim.cmd("w " .. input)
+				vim.cmd(cmd .. " " .. input)
 			else
-				vim.notify("Unable to save. No name provided", "warn", { title = "SmartSave" })
+				vim.cmd("mod")
+				vim.notify("Unable to save buffer. No name provided", "warn", { title = "SmartSave" })
 			end
 		end)
 	else
-		vim.cmd("w")
+		vim.cmd(cmd)
 	end
 end
 
 function M.smart_quit()
-	local bufnr = vim.api.nvim_get_current_buf()
-	local modified = vim.api.nvim_buf_get_option(bufnr, "modified")
-	local bufname = vim.fs.basename(vim.api.nvim_buf_get_name(bufnr))
+	local bufnr = api.nvim_get_current_buf()
+	local modified = api.nvim_buf_get_option(bufnr, "modified")
+	local bufname = vim.fs.basename(api.nvim_buf_get_name(bufnr))
 	if modified then
-		local answer =
-			vim.fn.confirm('You have unsaved changes to "' .. bufname .. '". Quit anyway?', "&No\n&yes\n&save")
+		local answer = vim.fn.confirm(
+			'You have unsaved changes to "' .. bufname .. '". Quit anyway?',
+			"&N No\n&y Yes\n&s Save\n&x SaveQuit"
+		)
 		if answer == 2 then
 			vim.cmd("q!")
 		elseif answer == 3 then
-			require("user.keymaps").smart_savequit()
+			vim.cmd("mod")
+			smart_save_quit(bufname, "w") -- only save
+		elseif answer == 4 then
+			vim.cmd("mod")
+			smart_save_quit(bufname, "x") -- save and quit
 		else
+			vim.cmd("mod")
 			vim.notify("There are unsaved canges", "warn", { title = "SmartQuit" })
 		end
 	else
-		vim.cmd("q")
-	end
-end
-
-function M.smart_savequit()
-	local bufnr = vim.api.nvim_get_current_buf()
-	local bufname = vim.api.nvim_buf_get_name(bufnr)
-	if bufname == "" then
-		vim.ui.input({
-			prompt = "Name of the new buffer: ",
-		}, function(input)
-			if input ~= nil then
-				vim.cmd("x " .. input)
-			else
-				vim.notify("Unable to save. No name provided", "warn", { title = "SmartSaveQuit" })
-			end
-		end)
-	else
-		vim.cmd("x")
+		vim.cmd("q!")
 	end
 end
 
@@ -102,9 +89,9 @@ keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 keymap("n", "'", "<End>", opts) -- remap "'" as "$" to go at the end of the line
 keymap("n", "<leader>q", "<cmd>lua require('user.keymaps').smart_quit()<CR>", opts) -- force quit with <leader>+q
 keymap("n", "<leader>c", ":bdelete %<cr>", opts) -- close buffer with <leader>+c
-keymap("n", "<leader>w", "<cmd>lua require('user.keymaps').smart_save()<CR>", opts) -- save with <leader>+w
+-- keymap("n", "<leader>w", "<cmd>lua require('user.keymaps').smart_save()<CR>", opts) -- save with <leader>+w
 -- keymap("n", "<leader>w", ":w<cr>", opts) -- save with <leader>+w
-keymap("n", "<leader>x", "<cmd>lua require('user.keymaps').smart_savequit()<CR>", opts) -- save with <leader>+x
+-- keymap("n", "<leader>x", "<cmd>lua require('user.keymaps').smart_savequit()<CR>", opts) -- save with <leader>+x
 -- keymap("n", "<leader>x", ":x<cr>", opts) -- save and quit with <leader>+x
 -- keymap("n", "<leader>gph", ":Gitsigns preview_hunk<CR>", opts) -- Gitsigns
 ------------------------------------------------------------------------------------------------------------------------------------------------
