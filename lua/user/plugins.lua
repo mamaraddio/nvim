@@ -52,6 +52,7 @@ return packer.startup(function(use)
 	use("lewis6991/impatient.nvim") -- Speedup NeoVim loading times
 	use("rcarriga/nvim-notify") -- Notification manager
 	use("kyazdani42/nvim-web-devicons") -- File icons
+	use("NvChad/nvim-colorizer.lua") -- Colorize colors name/code
 	use("lewis6991/gitsigns.nvim")
 	use("kyazdani42/nvim-tree.lua") -- File explorer
 	use("lukas-reineke/indent-blankline.nvim")
