@@ -8,7 +8,7 @@ This config is built over **Neovim v0.8+** and have no commit pinned, so you can
 To use this conifg files run the following:
 
 ```bash
-git clone https://github.com/mamaraddio/nvim ~/.config/nvim
+git clone --dept 1 https://github.com/mamaraddio/nvim ~/.config/nvim
 ```
 
 You'll need to restart **Neovim** a couple of time in order to insattl all the plugins
