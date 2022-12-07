@@ -20,7 +20,8 @@ pacman -Sy xsel node npm yarn
 ```
 ### debian/ubuntu based systems
 ```sh
-apt update && apt install xsel node npm yarn
+apt update 
+apt install xsel node npm yarn
 ```
 If you are on **wayland** replace _xsel_ with [wayclip](https://github.com/noocsharp/wayclip)
 
