@@ -1,6 +1,6 @@
 # Nvim
 ---
-This repo contains my peesonal configuration files for NeoVim written in Lua.<BR>
+This repo contains my peesonal configuration files for **Neovim** written in Lua.<BR>
 This repo was created following this template [nvim-basic-ide](https://github.com/LunarVim/nvim-basic-ide) and [this playlist](https://www.youtube.com/playlist?list=PLhoH5vyxr6Qq41NFL4GvhFp-WLd5xzIzZ)
 
 This config is built over **Neovim v0.8+** and have no commit pinned, so you can have to manage breaking changes
