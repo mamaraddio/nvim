@@ -1,5 +1,6 @@
 lazy-lock.json
 lua/plugins/*.back
+lua/plugins/*.disable
 
 # Compiled Lua sources
 luac.out
