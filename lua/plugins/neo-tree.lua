@@ -1,6 +1,13 @@
 return {
 	"nvim-neo-tree/neo-tree.nvim",
 	branch = "v3.x",
+	keys = {
+		{
+			"<leader>e",
+			luacmd(vim.cmd.Neotree, "toggle"),
+			desc = "Toggle file explorer",
+		},
+	},
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"MunifTanjim/nui.nvim",
@@ -23,11 +30,6 @@ return {
 			},
 		},
 	},
-	init = function()
-		wk.add({
-			{ "<leader>e", luacmd(vim.cmd.Neotree, "toggle"), desc = "Toggle file explorer" },
-		})
-	end,
 	opts = {
 		close_if_last_window = true,
 		filesystem = {

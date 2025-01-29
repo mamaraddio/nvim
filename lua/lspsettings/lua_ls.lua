@@ -5,10 +5,10 @@ return {
 			completion = { callSnippet = "Both", displayContext = 5, keywordSnippet = "Both" },
 			format = {
 				enable = false,
-				defaultConfig = require("lspsettings/lua_format"),
+				-- defaultConfig = require("lspsettings/lua_format"),
 			},
 			dagnostics = {
-				globals = { "vim", "wk" },
+				globals = { "vim", "wk", "spec" },
 				-- globals = { "vim", "spec" },
 			},
 			runtime = {

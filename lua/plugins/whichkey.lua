@@ -1,7 +1,7 @@
 return {
 	"folke/which-key.nvim",
-  lazy = false,
-	priority = 2000,
+	lazy = false,
+	priority = 20000,
 	init = function()
 		_G.wk = require("which-key")
 	end,
