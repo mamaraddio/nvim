@@ -32,8 +32,8 @@ return {
 					hex_color = require("mini.hipatterns").gen_highlighter.hex_color(),
 				},
 			}, ]]
-			--[[ pairs = { modes = { insert = true, command = true } },
-			surround = true, ]]
+			-- pairs = { modes = { insert = true, command = true } },
+			surround = true,
 		}
 
 		for module, opts in pairs(enabled_modules) do
