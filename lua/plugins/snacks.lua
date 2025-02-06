@@ -106,7 +106,7 @@ return {
 		quickfile = { enabled = true },
 		rename = { enabled = true },
     scope = { enabled = true },
-		scroll = { enabled = true },
+		scroll = { animate_repeat = { delay = 50 } },
 		statuscolumn = { enabled = true },
 		words = { enabled = true },
 	},

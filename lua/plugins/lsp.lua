@@ -23,7 +23,7 @@ return {
 				ensure_installed = servers,
 			},
 			dependencies = {
-				"mason.nvim",
+				"williamboman/mason.nvim",
 				opts = {
 					ui = {
 						border = "rounded",
@@ -47,8 +47,8 @@ return {
 				desc = "Toggle Hints",
 			},
 			{ "<leader>li", vim.cmd.LspInfo, desc = "LSP Info" },
-			{ "<leader>lj", vim.diagnostic.goto_next, desc = "Next Diagnostic" },
-			{ "<leader>lk", vim.diagnostic.goto_prev, desc = "Prev Diagnostic" },
+			{ "<leader>lj", luacmd(vim.diagnostic.jump, { count = 1, float = true }), desc = "Next Diagnostic" },
+			{ "<leader>lk", luacmd(vim.diagnostic.jump, { count = -1, float = true }), desc = "Prev Diagnostic" },
 			{ "<leader>ll", vim.lsp.codelens.run, desc = "CodeLens Action" },
 			{ "<leader>lq", vim.diagnostic.setloclist, desc = "Quickfix" },
 			{ "<leader>lr", vim.lsp.buf.rename, desc = "Rename" },
@@ -104,7 +104,7 @@ return {
 					wk.add({ "gr", vim.lsp.buf.references, desc = "Goto References" , options})
 					wk.add({ "gl", vim.diagnostic.open_float, desc = "Diagnostic Float" , options})
 
-					if client.supports_method("textDocument/inlayHint") then
+					if client:supports_method("textDocument/inlayHint") then
 						vim.lsp.inlay_hint.enable(true, { bufnr })
 					end
 				end,
