@@ -20,6 +20,8 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 	end,
 })
 
+-- vim.cmd.colorscheme("cyberdream")
+
 vim.api.nvim_create_autocmd({ "CmdWinEnter" }, {
 	callback = function() vim.cmd.quit() end,
 })

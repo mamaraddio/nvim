@@ -1,14 +1,13 @@
 return {
 	"numToStr/Comment.nvim",
-	-- lazy = false,
+	event = "VeryLazy",
 	dependencies = {
 		{
 			"JoosepAlviste/nvim-ts-context-commentstring",
 			event = "VeryLazy",
 		},
 	},
-	config = function()
-		local wk = require("which-key")
+	init = function()
 		wk.add({
 			{ "<leader>/", "<Plug>(comment_toggle_linewise_current)", desc = "Comment" },
 		})
@@ -16,8 +15,9 @@ return {
 		wk.add({
 			{ "<leader>/", "<Plug>(comment_toggle_linewise_visual)", desc = "Comment", mode = "v" },
 		})
-
 		vim.g.skip_ts_context_commentstring_module = true
+	end,
+	config = function()
 		---@diagnostic disable: missing-fields
 		require("ts_context_commentstring").setup({
 			enable_autocmd = false,

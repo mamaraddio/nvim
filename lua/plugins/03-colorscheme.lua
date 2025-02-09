@@ -1,33 +1,33 @@
 return {
-	{
+	--[[ {
 		"LunarVim/darkplus.nvim",
 		lazy = false, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
-	},
+	}, ]]
 	{
 		"scottmckendry/cyberdream.nvim",
 		lazy = false,
 		priority = 1000,
-		opt = {
-			-- Enable transparent background
-			transparent = false,
+		config = function()
+			require("cyberdream").setup({
+				-- Enable transparent background
+				transparent = false,
 
-			-- Enable italics comments
-			italic_comments = false,
+				-- Enable italics comments
+				italic_comments = false,
 
-			-- Replace all fillchars with ' ' for the ultimate clean look
-			hide_fillchars = false,
+				-- Replace all fillchars with ' ' for the ultimate clean look
+				hide_fillchars = false,
 
-			-- Modern borderless telescope theme - also applies to fzf-lua
-			borderless_telescope = false,
+				-- Modern borderless telescope theme - also applies to fzf-lua
+				borderless_pickers = false,
 
-			-- Set terminal colors used in `:terminal`
-			terminal_colors = true,
+				-- Set terminal colors used in `:terminal`
+				terminal_colors = true,
 
-			-- Improve start up time by caching highlights. Generate cache with :CyberdreamBuildCache and clear with :CyberdreamClearCache
-			cache = true,
+				-- Improve start up time by caching highlights. Generate cache with :CyberdreamBuildCache and clear with :CyberdreamClearCache
+				cache = true,
 
-			theme = {
 				variant = "default", -- use "light" for the light variant. Also accepts "auto" to set dark or light colors based on the current value of `vim.o.background`
 				saturation = 1, -- accepts a value between 0 and 1. 0 will be fully desaturated (greyscale) and 1 will be the full color (default)
 				highlights = {
@@ -57,25 +57,22 @@ return {
 					green = "#00ff00",
 					magenta = "#ff00ff",
 				},
-			},
 
-			-- Disable or enable colorscheme extensions
-			extensions = {
-				telescope = true,
-				notify = true,
-				mini = true,
-			},
-		},
-		config = function()
+				-- Disable or enable colorscheme extensions
+				extensions = {
+					notify = true,
+					mini = true,
+				},
+			})
 			vim.cmd.colorscheme("cyberdream")
 
-			vim.api.nvim_set_hl(0, "FzfLuaBorder", {
+			--[[ vim.api.nvim_set_hl(0, "FzfLuaBorder", {
 				cterm = {
 					italic = false,
 				},
 				fg = "#4e545f",
 				italic = false,
-			})
+			}) ]]
 		end,
 	},
 }

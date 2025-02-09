@@ -42,7 +42,7 @@ vim.opt.scrolloff = 0
 vim.opt.sidescrolloff = 8
 vim.opt.title = false
 vim.opt.confirm = true
--- colorcolumn = "80",
+--colorcolumn = "80",
 -- colorcolumn = "120",
 
 vim.opt.fillchars:append({
