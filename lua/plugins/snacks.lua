@@ -90,7 +90,15 @@ return {
 		-- your configuration comes here
 		-- or leave it empty to use the default settings
 		-- refer to the configuration section below
-		animation = { enabled = true },
+		animate = {
+			{
+				enabled = true,
+				duration = 15, -- ms per step
+				easing = "Sine",
+				fps = 60, -- frames per second. Global setting for all animations
+			},
+		},
+
 		bigfile = { enabled = true },
 		dashboard = { enabled = true, opts = { preset = "doom" } },
 		debug = { enabled = true },
@@ -98,6 +106,7 @@ return {
 		explorer = { enabled = true },
 		-- git = { enabled = true },
 		-- gitbrowse = { enabled = true },
+		image = { enabled = false },
 		indent = { enabled = true },
 		input = { enabled = true },
 		lazygit = { enabled = true },
@@ -105,7 +114,7 @@ return {
 		picker = { enabled = true },
 		quickfile = { enabled = true },
 		rename = { enabled = true },
-    scope = { enabled = true },
+		scope = { enabled = true },
 		scroll = { enabled = true },
 		statuscolumn = { enabled = true },
 		words = { enabled = true },

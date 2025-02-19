@@ -15,29 +15,39 @@ end
 return {
 	{
 		"williamboman/mason.nvim",
-		-- event = "VeryLazy",
 		event = { "BufRead", "BufNewFile" },
 		opts = { ui = { border = "rounded" } },
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
-		-- event = "VeryLazy",
-    cmd = "Mason",
+		cmd = "Mason",
 		opts = { ensure_installed = servers },
 	},
 	{
 		"jay-babu/mason-null-ls.nvim",
-		-- event = "VeryLazy",
-    cmd = "Mason",
+		cmd = "Mason",
 		opts = { handlers = {} },
 	},
 	{
+		"folke/lazydev.nvim",
+		ft = "lua", -- only load on lua files
+		opts = {
+			--- See the configuration section for more details
+			library = {
+				{ path = "${3rd}/luv/library", words = { "vim%.uv" } }, -- Load luvit types when the `vim.uv` word is found
+				vim.api.nvim_get_runtime_file("", true),
+			},
+		},
+		config = true,
+	},
+	{
 		"neovim/nvim-lspconfig",
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "BufReadPost", "BufNewFile" },
 		dependencies = {
-			"folke/neodev.nvim",
+			{ "folke/neoconf.nvim", cmd = "Neoconf", config = true },
 		},
 		init = function()
+			local wk = require("which-key")
 			wk.add({
 				{ "<leader>l", group = "LSP" },
 				{ "<leader>la", vim.lsp.buf.code_action, desc = "Code Action" },
@@ -102,6 +112,7 @@ return {
 				local opts = {
 					on_attach = function(client, bufnr)
 						local options = { noremap = true, silent = true, buffer = bufnr }
+						local wk = require("which-key")
 						wk.add({ "gd", vim.lsp.buf.definition, desc = "Goto Definition", options })
 						wk.add({ "gD", vim.lsp.buf.declaration, desc = "Goto Declaration", options })
 						wk.add({ "K", vim.lsp.buf.hover, desc = "Hover Definition", options })
@@ -121,9 +132,9 @@ return {
 					opts = vim.tbl_deep_extend("force", settings, opts)
 				end
 
-				if server == "lua_ls" then
+				--[[ if server == "lua_ls" then
 					require("neodev").setup()
-				end
+				end ]]
 
 				lspconfig[server].setup(opts)
 			end

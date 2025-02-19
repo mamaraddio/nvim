@@ -19,7 +19,7 @@ return {
 			},
 			workspace = {
 				checkThirdParty = false,
-				library = {
+				--[[ library = {
 					vim.api.nvim_get_runtime_file("", true),
 					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
 					[vim.fn.stdpath("config") .. "/lua"] = true,
@@ -27,15 +27,15 @@ return {
 					[vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy"] = true,
 					maxPreload = 100000,
 					preloadFileSize = 10000,
-				},
+				}, ]]
 			},
 			hint = {
 				enable = true,
-				arrayIndex = "Disable", -- "Enable" | "Auto" | "Disable"
+				arrayIndex = "Auto", -- "Enable" | "Auto" | "Disable"
 				await = true,
 				paramName = "All", -- "All" | "Literal" | "Disable"
-				paramType = false,
-				semicolon = "Disable", -- "All" | "SameLine" | "Disable"
+				paramType = true,
+				semicolon = "SameLine", -- "All" | "SameLine" | "Disable"
 				setType = false,
 			},
 			telemetry = { enable = false },

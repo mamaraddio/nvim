@@ -1,13 +1,13 @@
 return {
 	"folke/which-key.nvim",
 	lazy = false,
-	priority = 20000,
+	priority = 1050,
 	init = function()
-		_G.wk = require("which-key")
+		require("which-key").add({ "<leader>L", require("lazy").home, desc = "Show Lazy" })
 	end,
 	opts = {
 		defaults = {
-			preset = "modern",
+			preset = "helix",
 			mode = "n",
 			prefix = "<leader>",
 		},
