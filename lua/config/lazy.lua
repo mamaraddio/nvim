@@ -35,7 +35,7 @@ require("lazy").setup({
 		{ import = "plugins" },
 	},
 	-- Configure any other settings here. See the documentation for more details.
-	install = { colorscheme = { vim.cmd.colorscheme() } }, -- colorscheme that will be used when installing plugins.
+	install = { colorscheme = { "tokyonight" } }, -- colorscheme that will be used when installing plugins.
 	checker = { enabled = true }, -- automatically check for plugin updates
 	change_detection = {
 		enabled = true, -- automatically check for config file changes and reload the ui

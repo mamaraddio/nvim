@@ -3,10 +3,13 @@ return {
 		"folke/tokyonight.nvim",
 		lazy = false,
 		priority = 1000,
-		opts = {},
+		opts = {
+			style = "night",
+			styles = {
+				comments = { italic = false },
+			},
+		},
 		init = function()
-			vim.g.tokyonight_style = "storm"
-			vim.g.tokyonight_italic_comments = false
 			vim.cmd.colorscheme("tokyonight")
 		end,
 	},
@@ -23,9 +26,9 @@ return {
 		"LunarVim/darkplus.nvim",
 		lazy = false, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
-    init = function()
-      -- vim.cmd.colorscheme("darkplus")
-    end,
+		init = function()
+			-- vim.cmd.colorscheme("darkplus")
+		end,
 	},
 	{
 		"scottmckendry/cyberdream.nvim",
@@ -92,8 +95,15 @@ return {
 
 			-- Disable or enable colorscheme extensions
 			extensions = {
+				blinkcmp = true,
+				gitsigns = true,
+				lazy = true,
 				notify = true,
 				mini = true,
+				snacks = true,
+				treesitter = true,
+				treesittercontext = true,
+				whichkey = true,
 			},
 		},
 	},
