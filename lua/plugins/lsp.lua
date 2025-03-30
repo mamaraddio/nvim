@@ -40,12 +40,10 @@ return {
 		},
 		config = true,
 	},
+	{ "folke/neoconf.nvim", config = true },
 	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPost", "BufNewFile" },
-		dependencies = {
-			{ "folke/neoconf.nvim", cmd = "Neoconf", config = true },
-		},
 		init = function()
 			local wk = require("which-key")
 			wk.add({
@@ -62,8 +60,8 @@ return {
 					desc = "Toggle Hints",
 				},
 				{ "<leader>li", vim.cmd.LspInfo, desc = "LSP Info" },
-				{ "<leader>lj", vim.diagnostic.goto_next, desc = "Next Diagnostic" },
-				{ "<leader>lk", vim.diagnostic.goto_prev, desc = "Prev Diagnostic" },
+				{ "<leader>lj", luacmd(vim.diagnostic.jump, { count = 1, float = true }), desc = "Next Diagnostic" },
+				{ "<leader>lk", luacmd(vim.diagnostic.jump, { count = -1, float = true }), desc = "Prev Diagnostic" },
 				{ "<leader>ll", vim.lsp.codelens.run, desc = "CodeLens Action" },
 				{ "<leader>lq", vim.diagnostic.setloclist, desc = "Quickfix" },
 				{ "<leader>lr", vim.lsp.buf.rename, desc = "Rename" },
@@ -103,9 +101,7 @@ return {
 				vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
 			end
 
-			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-			vim.lsp.handlers["textDocument/signatureHelp"] =
-				vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+			vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.buf.signature_help({ border = "rounded" })
 			require("lspconfig.ui.windows").default_options.border = "rounded"
 
 			for _, server in pairs(servers) do
@@ -113,9 +109,14 @@ return {
 					on_attach = function(client, bufnr)
 						local options = { noremap = true, silent = true, buffer = bufnr }
 						local wk = require("which-key")
-						wk.add({ "gd", vim.lsp.buf.definition, desc = "Goto Definition", options })
+						-- wk.add({ "gd", vim.lsp.buf.definition, desc = "Goto Definition", options })
 						wk.add({ "gD", vim.lsp.buf.declaration, desc = "Goto Declaration", options })
-						wk.add({ "K", vim.lsp.buf.hover, desc = "Hover Definition", options })
+						wk.add({
+							"K",
+							luacmd(vim.lsp.buf.hover, { border = "rounded" }),
+							desc = "Hover Definition",
+							options,
+						})
 						wk.add({ "gI", vim.lsp.buf.implementation, desc = "Goto Implementation", options })
 						wk.add({ "gr", vim.lsp.buf.references, desc = "Goto References", options })
 						wk.add({ "gl", vim.diagnostic.open_float, desc = "Diagnostic Float", options })

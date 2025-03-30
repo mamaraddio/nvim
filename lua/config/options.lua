@@ -33,6 +33,8 @@ vim.opt.foldenable = true                       -- enable fold
 vim.opt.foldlevel = 99                          -- start editing with all folds opened
 vim.opt.foldmethod = "expr"                     -- use tree-sitter for folding method
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+-- vim.opt.foldexpr = "v:lua.vim.lsp.foldexpr()"
+vim.opt.foldcolumn = "0"
 vim.treesitter.language.register("bash", "zsh")
 vim.opt.pumblend = 10
 vim.opt.laststatus = 3
@@ -48,6 +50,7 @@ vim.opt.confirm = true
 vim.opt.fillchars:append({
 	stl = " ",
 	eob = " ",
+  fold = " ",
 })
 
 vim.opt.shortmess:append({ c = true })
