@@ -4,11 +4,11 @@ return {
 		Lua = {
 			completion = { callSnippet = "Both", displayContext = 5, keywordSnippet = "Both" },
 			format = {
-				enable = false,
+				enable = true,
 				-- defaultConfig = require("lspsettings/lua_format"),
 			},
 			dagnostics = {
-				globals = { "vim", "wk", "spec" },
+				globals = { "vim" },
 				-- globals = { "vim", "spec" },
 			},
 			runtime = {

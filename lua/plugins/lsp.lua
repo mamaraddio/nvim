@@ -16,17 +16,72 @@ return {
 	{
 		"williamboman/mason.nvim",
 		event = { "BufRead", "BufNewFile" },
+		dependencies = {
+			{
+				"WhoIsSethDaniel/mason-tool-installer.nvim",
+				init = function()
+					vim.api.nvim_create_autocmd("User", {
+						pattern = "MasonToolsStartingInstall",
+						callback = function()
+							vim.schedule(function()
+								print("mason-tool-installer is starting")
+							end)
+						end,
+					})
+					vim.api.nvim_create_autocmd("User", {
+						pattern = "MasonToolsUpdateCompleted",
+						callback = function(e)
+							vim.schedule(function()
+								print(vim.inspect(e.data)) -- print the table that lists the programs that were installed
+							end)
+						end,
+					})
+				end,
+				opts = function()
+					--- Estrae valori stringa univoci da una tabella di tabelle.
+					--- Versione leggermente più concisa.
+					--- @param input_table table Tabella di input { key = {"a", "b"}, ... }
+					--- @return table Flattened tabella list-like con valori univoci {"a", "b", ...}
+					local function flatten_valuer(input_table)
+						local seen = {}
+						local unique_list = {}
+						local index = 0 -- Usiamo un indice separato per l'inserimento
+
+						for _, inner_table in pairs(input_table or {}) do -- Usa or {} per gestire nil input
+							if type(inner_table) == "table" then
+								for _, value_string in ipairs(inner_table) do
+									-- Combina controllo e azione
+									if seen[value_string] == nil then -- Verifica esplicita con nil
+										seen[value_string] = true -- Marca come visto
+										index = index + 1
+										unique_list[index] = value_string -- Inserimento diretto tramite indice
+									end
+								end
+							end
+						end
+
+						return unique_list
+					end
+
+					local list = vim.list_extend(
+						flatten_valuer(require("lint").linters_by_ft),
+						flatten_valuer(require("conform").formatters_by_ft)
+					)
+					-- vim.notify(vim.inspect(list), vim.log.levels.INFO)
+
+					return {
+						ensure_installed = list,
+						auto_update = true,
+					}
+				end,
+			},
+		},
 		opts = { ui = { border = "rounded" } },
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
-		cmd = "Mason",
-		opts = { ensure_installed = servers },
-	},
-	{
-		"jay-babu/mason-null-ls.nvim",
-		cmd = "Mason",
-		opts = { handlers = {} },
+		dependencies = { "mason.nvim" },
+		opts = { ensure_installed = servers, automatic_installation = { exclude = { "rust_analyzer" } } },
 	},
 	{
 		"folke/lazydev.nvim",
@@ -43,22 +98,22 @@ return {
 	{ "folke/neoconf.nvim", config = true },
 	{
 		"neovim/nvim-lspconfig",
+		dependencies = "folke/neoconf.nvim",
 		event = { "BufReadPost", "BufNewFile" },
 		init = function()
 			local wk = require("which-key")
 			wk.add({
 				{ "<leader>l", group = "LSP" },
 				{ "<leader>la", vim.lsp.buf.code_action, desc = "Code Action" },
-				{ "<leader>lf", luacmd(vim.lsp.buf.format, { async = true }), desc = "Format" }, --[[ filter = function(client) return client.name ~= 'typescript-tools' end ]]
 				{
-					"<leader>lh",
-					function()
-						local bufnr = vim.api.nvim_get_current_buf()
-						local hint = vim.lsp.inlay_hint
-						hint.enable(not hint.is_enabled({ bufnr }), { bufnr })
-					end,
-					desc = "Toggle Hints",
-				},
+					"<leader>lf",
+					luacmd(require("conform").format, {
+						lsp_fallback = true,
+						async = true,
+						timeout_ms = 500,
+					}),
+					desc = "Format file or range (in visual mode)",
+				}, --[[ filter = function(client) return client.name ~= 'typescript-tools' end ]]
 				{ "<leader>li", vim.cmd.LspInfo, desc = "LSP Info" },
 				{ "<leader>lj", luacmd(vim.diagnostic.jump, { count = 1, float = true }), desc = "Next Diagnostic" },
 				{ "<leader>lk", luacmd(vim.diagnostic.jump, { count = -1, float = true }), desc = "Prev Diagnostic" },
@@ -74,15 +129,14 @@ return {
 			vim.diagnostic.config({
 				signs = {
 					active = true,
-					values = {
-						{ name = "DiagnosticSignError", text = icons.Error },
-						{ name = "DiagnosticSignWarn", text = icons.Warning },
-						{ name = "DiagnosticSignHint", text = icons.Hint },
-						{ name = "DiagnosticSignInfo", text = icons.Information },
+					text = {
+						[vim.diagnostic.severity.ERROR] = icons.Error,
+						[vim.diagnostic.severity.WARN] = icons.Warning,
+						[vim.diagnostic.severity.INFO] = icons.Hint,
+						[vim.diagnostic.severity.HINT] = icons.Information,
 					},
 				},
-				virtual_text = false,
-				update_in_insert = false,
+				update_in_insert = true,
 				underline = true,
 				severity_sort = true,
 				float = {
@@ -96,19 +150,14 @@ return {
 				},
 			})
 
-			---@diagnostic disable-next-line: param-type-mismatch
-			for _, sign in ipairs(vim.tbl_get(vim.diagnostic.config(), "signs", "values") or {}) do
-				vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
-			end
-
 			vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.buf.signature_help({ border = "rounded" })
 			require("lspconfig.ui.windows").default_options.border = "rounded"
 
 			for _, server in pairs(servers) do
 				local opts = {
 					on_attach = function(client, bufnr)
-						local options = { noremap = true, silent = true, buffer = bufnr }
 						local wk = require("which-key")
+						local options = { noremap = true, silent = true, buffer = bufnr }
 						-- wk.add({ "gd", vim.lsp.buf.definition, desc = "Goto Definition", options })
 						wk.add({ "gD", vim.lsp.buf.declaration, desc = "Goto Declaration", options })
 						wk.add({
@@ -133,41 +182,8 @@ return {
 					opts = vim.tbl_deep_extend("force", settings, opts)
 				end
 
-				--[[ if server == "lua_ls" then
-					require("neodev").setup()
-				end ]]
-
 				lspconfig[server].setup(opts)
 			end
-		end,
-	},
-	{ -- none-ls
-		"nvimtools/none-ls.nvim",
-		event = "VeryLazy",
-		dependencies = {
-			"nvimtools/none-ls-extras.nvim",
-			lazy = true,
-		},
-		config = function()
-			local null_ls = require("null-ls")
-
-			local formatting = null_ls.builtins.formatting
-			local diagnostics = null_ls.builtins.diagnostics
-			local completion = null_ls.builtins.completion
-
-			null_ls.setup({
-				debug = false,
-				sources = {
-					require("none-ls.formatting.beautysh"),
-					formatting.stylua,
-					-- formatting.prettier.with {
-					--   extra_filetypes = { "toml" },
-					--   -- extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
-					-- },
-					diagnostics.codespell,
-					completion.spell,
-				},
-			})
 		end,
 	},
 }
