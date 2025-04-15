@@ -182,7 +182,8 @@ return {
 					opts = vim.tbl_deep_extend("force", settings, opts)
 				end
 
-				lspconfig[server].setup(opts)
+				-- lspconfig[server].setup(opts)
+				vim.lsp.enable({ "lua_ls", "vimls" })
 			end
 		end,
 	},
