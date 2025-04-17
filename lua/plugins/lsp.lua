@@ -161,11 +161,12 @@ return {
 
 				local require_ok, settings = pcall(require, "lspsettings." .. server)
 				if require_ok then
-					opts = vim.tbl_deep_extend("force", settings, opts)
+					-- opts = vim.tbl_deep_extend("force", settings, opts)
+					vim.lsp.config(server, settings)
 				end
 
 				-- lspconfig[server].setup(opts)
-				vim.lsp.enable({ "lua_ls", "vimls" })
+				vim.lsp.enable(server)
 			end
 		end,
 	},
