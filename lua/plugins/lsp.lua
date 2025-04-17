@@ -20,24 +20,6 @@ return {
 		dependencies = {
 			{
 				"WhoIsSethDaniel/mason-tool-installer.nvim",
-				init = function()
-					vim.api.nvim_create_autocmd("User", {
-						pattern = "MasonToolsStartingInstall",
-						callback = function()
-							vim.schedule(function()
-								vim.notify("mason-tool-installer is starting")
-							end)
-						end,
-					})
-					vim.api.nvim_create_autocmd("User", {
-						pattern = "MasonToolsUpdateCompleted",
-						callback = function(e)
-							vim.schedule(function()
-								vim.notify(vim.inspect(e.data)) -- print the table that lists the programs that were installed
-							end)
-						end,
-					})
-				end,
 				opts = function()
 					--- @param input_table table Tabella di input { key = {"a", "b"}, ... }
 					--- @return string[] flattened tabella list-like con valori univoci {"a", "b", ...}
