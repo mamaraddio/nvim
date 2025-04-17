@@ -4,7 +4,7 @@ return {
 	keys = {
 		{
 			"<leader>e",
-			luacmd(vim.cmd.Neotree, "toggle"),
+			require("utils").luacmd(vim.cmd.Neotree, "toggle"),
 			desc = "Toggle file explorer",
 		},
 	},

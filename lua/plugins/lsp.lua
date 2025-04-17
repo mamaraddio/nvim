@@ -1,3 +1,4 @@
+local luacmd = require("utils").luacmd
 local servers = {
 	"lua_ls",
 	"vimls",
@@ -24,7 +25,7 @@ return {
 						pattern = "MasonToolsStartingInstall",
 						callback = function()
 							vim.schedule(function()
-								print("mason-tool-installer is starting")
+								vim.notify("mason-tool-installer is starting")
 							end)
 						end,
 					})
@@ -32,7 +33,7 @@ return {
 						pattern = "MasonToolsUpdateCompleted",
 						callback = function(e)
 							vim.schedule(function()
-								print(vim.inspect(e.data)) -- print the table that lists the programs that were installed
+								vim.notify(vim.inspect(e.data)) -- print the table that lists the programs that were installed
 							end)
 						end,
 					})
@@ -102,9 +103,10 @@ return {
 		event = { "BufReadPost", "BufNewFile" },
 		init = function()
 			local wk = require("which-key")
+
 			wk.add({
 				{ "<leader>l", group = "LSP" },
-				{ "<leader>la", vim.lsp.buf.code_action, desc = "Code Action" },
+				{ "<leader>la", luacmd(vim.lsp.buf.code_action), desc = "Code Action" },
 				{
 					"<leader>lf",
 					luacmd(require("conform").format, {
@@ -114,12 +116,12 @@ return {
 					}),
 					desc = "Format file or range (in visual mode)",
 				}, --[[ filter = function(client) return client.name ~= 'typescript-tools' end ]]
-				{ "<leader>li", vim.cmd.LspInfo, desc = "LSP Info" },
+				{ "<leader>li", luacmd(vim.cmd.LspInfo), desc = "LSP Info" },
 				{ "<leader>lj", luacmd(vim.diagnostic.jump, { count = 1, float = true }), desc = "Next Diagnostic" },
 				{ "<leader>lk", luacmd(vim.diagnostic.jump, { count = -1, float = true }), desc = "Prev Diagnostic" },
-				{ "<leader>ll", vim.lsp.codelens.run, desc = "CodeLens Action" },
-				{ "<leader>lq", vim.diagnostic.setloclist, desc = "Quickfix" },
-				{ "<leader>lr", vim.lsp.buf.rename, desc = "Rename" },
+				{ "<leader>ll", luacmd(vim.lsp.codelens.run), desc = "CodeLens Action" },
+				{ "<leader>lq", luacmd(vim.diagnostic.setloclist), desc = "Quickfix" },
+				{ "<leader>lr", luacmd(vim.lsp.buf.rename), desc = "Rename" },
 			})
 		end,
 		config = function()
@@ -159,16 +161,16 @@ return {
 						local wk = require("which-key")
 						local options = { noremap = true, silent = true, buffer = bufnr }
 						-- wk.add({ "gd", vim.lsp.buf.definition, desc = "Goto Definition", options })
-						wk.add({ "gD", vim.lsp.buf.declaration, desc = "Goto Declaration", options })
+						wk.add({ "gD", luacmd(vim.lsp.buf.declaration), desc = "Goto Declaration", options })
 						wk.add({
 							"K",
 							luacmd(vim.lsp.buf.hover, { border = "rounded" }),
 							desc = "Hover Definition",
 							options,
 						})
-						wk.add({ "gI", vim.lsp.buf.implementation, desc = "Goto Implementation", options })
-						wk.add({ "gr", vim.lsp.buf.references, desc = "Goto References", options })
-						wk.add({ "gl", vim.diagnostic.open_float, desc = "Diagnostic Float", options })
+						wk.add({ "gI", luacmd(vim.lsp.buf.implementation), desc = "Goto Implementation", options })
+						wk.add({ "gr", luacmd(vim.lsp.buf.references), desc = "Goto References", options })
+						wk.add({ "gl", luacmd(vim.diagnostic.open_float), desc = "Diagnostic Float", options })
 
 						if client.supports_method("textDocument/inlayHint") then
 							vim.lsp.inlay_hint.enable(true, { bufnr })
