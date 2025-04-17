@@ -39,10 +39,8 @@ return {
 					})
 				end,
 				opts = function()
-					--- Estrae valori stringa univoci da una tabella di tabelle.
-					--- Versione leggermente più concisa.
 					--- @param input_table table Tabella di input { key = {"a", "b"}, ... }
-					--- @return table Flattened tabella list-like con valori univoci {"a", "b", ...}
+					--- @return string[] flattened tabella list-like con valori univoci {"a", "b", ...}
 					local function flatten_valuer(input_table)
 						local seen = {}
 						local unique_list = {}

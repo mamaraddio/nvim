@@ -36,4 +36,4 @@ function Utils.luacmd(command, args)
 	end
 end
 
-return Utilsa
+return Utils
