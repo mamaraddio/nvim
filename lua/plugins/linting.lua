@@ -1,6 +1,5 @@
 return {
 	"mfussenegger/nvim-lint",
-	-- dependencies = { "WhoIsSethDaniel/mason-tool-installer.nvim" },
 	event = {
 		"BufReadPre",
 		"BufNewFile",
@@ -10,14 +9,15 @@ return {
 
 		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
 			group = lint_augroup,
-			callback = function()
-				require("lint").try_lint()
-			end,
+			callback = function() require("lint").try_lint() end,
 		})
 
-		vim.keymap.set("n", "<leader>ld", function()
-			require("lint").try_lint()
-		end, { desc = "Trigger linting for current file" })
+		vim.keymap.set(
+			"n",
+			"<leader>ld",
+			function() require("lint").try_lint() end,
+			{ desc = "Trigger linting for current file" }
+		)
 	end,
 	config = function()
 		require("lint").linters_by_ft = {

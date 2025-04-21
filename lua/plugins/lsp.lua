@@ -17,7 +17,7 @@ return {
 	},
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		dependencies = { "mason.nvim" },
+		dependencies = { "mason.nvim", "mfussenegger/nvim-lint", "stevearc/conform.nvim" },
 		opts = function()
 			--- @param input_table table Tabella di input { key = {"a", "b"}, ... }
 			--- @return string[] flattened tabella list-like con valori univoci {"a", "b", ...}
