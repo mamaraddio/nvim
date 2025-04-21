@@ -31,7 +31,7 @@ return {
 			},
 			hint = {
 				enable = true,
-				arrayIndex = "Auto", -- "Enable" | "Auto" | "Disable"
+				arrayIndex = "Disable", -- "Enable" | "Auto" | "Disable"
 				await = true,
 				paramName = "All", -- "All" | "Literal" | "Disable"
 				paramType = true,

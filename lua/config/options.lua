@@ -1,4 +1,6 @@
+--stylua: ignore start
 vim.opt.backup = false                          -- creates a backup file
+vim.opt.winborder = "rounded"
 vim.opt.clipboard = "unnamedplus"               -- allows neovim to access the system clipboard
 vim.opt.cmdheight = 1                           -- more space in the neovim command line for displaying messages
 vim.opt.completeopt = { "menuone", "noselect" } -- mostly just for cmp
@@ -32,6 +34,7 @@ vim.opt.guifont = "monospace:h17"               -- the font used in graphical ne
 vim.opt.foldenable = true                       -- enable fold
 vim.opt.foldlevel = 99                          -- start editing with all folds opened
 vim.opt.foldmethod = "expr"                     -- use tree-sitter for folding method
+--stylua: ignore end
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 -- vim.opt.foldexpr = "v:lua.vim.lsp.foldexpr()"
 vim.opt.foldcolumn = "0"
@@ -50,7 +53,7 @@ vim.opt.confirm = true
 vim.opt.fillchars:append({
 	stl = " ",
 	eob = " ",
-  fold = " ",
+	fold = " ",
 })
 
 vim.opt.shortmess:append({ c = true })
