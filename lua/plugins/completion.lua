@@ -22,7 +22,7 @@ return {
 		},
 
 		-- use a release tag to download pre-built binaries
-		version = "0.10.0",
+		version = "*",
 		-- version = '0.9.0',
 		-- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
 		-- build = 'cargo build --release',
@@ -83,9 +83,7 @@ return {
 						components = {
 							label = {
 								---@param ctx blink.cmp.DrawItemContext
-								text = function(ctx)
-									return require("colorful-menu").blink_components_text(ctx)
-								end,
+								text = function(ctx) return require("colorful-menu").blink_components_text(ctx) end,
 								---@param ctx blink.cmp.DrawItemContext
 								highlight = function(ctx)
 									return require("colorful-menu").blink_components_highlight(ctx)
@@ -95,18 +93,14 @@ return {
 								ellipsis = false,
 								---@param ctx blink.cmp.DrawItemContext
 								text = function(ctx)
-									if ctx.kind == "Copilot" then
-										return ""
-									end
+									if ctx.kind == "Copilot" then return "" end
 									local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
 									return kind_icon
 								end,
 								-- Optionally, you may also use the highlights from mini.icons
 								---@param ctx blink.cmp.DrawItemContext
 								highlight = function(ctx)
-									if ctx.kind == "Copilot" then
-										return "MiniIconsGreen"
-									end
+									if ctx.kind == "Copilot" then return "MiniIconsGreen" end
 									local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
 									return hl
 								end,
