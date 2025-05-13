@@ -1,6 +1,6 @@
 return {
 	{
-		"giuxtaposition/blink-cmp-copilot",
+		"fang2hou/blink-copilot",
 		event = "InsertEnter",
 		dependencies = {
 			"zbirenbaum/copilot.lua",
@@ -9,26 +9,20 @@ return {
 			opts = {
 				suggestion = { enabled = false },
 				panel = { enabled = false },
+				filetypes = {
+					markdown = true,
+				},
 			},
 		},
 	},
 	{
 		"saghen/blink.cmp",
-		-- event = { "InsertEnter", "CmdlineEnter" },
-		-- optional: provides snippets for the snippet source
+		event = { "InsertEnter", "CmdlineEnter" },
 		dependencies = {
 			{ "rafamadriz/friendly-snippets", lazy = true },
 			{ "xzbdmw/colorful-menu.nvim", lazy = true, config = true },
 		},
-
-		-- use a release tag to download pre-built binaries
 		version = "*",
-		-- version = '0.9.0',
-		-- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-		-- build = 'cargo build --release',
-		-- If you use nix, you can build from source using latest nightly rust with:
-		-- build = 'nix run .#build-plugin',
-
 		---@module 'blink.cmp'
 		---@type blink.cmp.Config
 		---@return blink.cmp.Config
@@ -40,7 +34,6 @@ return {
 			keymap = {
 				preset = "enter",
 			},
-
 			completion = {
 				-- 'prefix' will fuzzy match on the text before the cursor
 				-- 'full' will fuzzy match on the text before *and* after the cursor
@@ -56,23 +49,13 @@ return {
 				-- or set per mode
 				list = {
 					selection = {
-						preselect = false,
+						preselect = true,
 						auto_insert = true,
 					},
 				},
-
 				menu = {
-					-- Don't automatically show the completion menu
 					auto_show = true,
 					border = "rounded",
-
-					-- nvim-cmp style menu
-					-- draw = {
-					--   columns = {
-					--     { "label",     "label_description", gap = 1 },
-					--     { "kind_icon", "kind" }
-					--   },
-					-- }
 					draw = {
 						align_to = "cursor",
 						treesitter = { "lsp" },
@@ -100,7 +83,7 @@ return {
 								-- Optionally, you may also use the highlights from mini.icons
 								---@param ctx blink.cmp.DrawItemContext
 								highlight = function(ctx)
-									if ctx.kind == "Copilot" then return "MiniIconsGreen" end
+									if ctx.kind == "Copilot" then return "MiniIconsCyan" end
 									local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
 									return hl
 								end,
@@ -108,21 +91,34 @@ return {
 						},
 					},
 				},
-
-				-- Show documentation when selecting a completion item
 				documentation = {
 					auto_show = true,
-					auto_show_delay_ms = 500,
+					auto_show_delay_ms = 300,
 					treesitter_highlighting = true,
-					window = { border = "rounded" },
 				},
-
-				-- Display a preview of the selected item on the current line
 				ghost_text = { enabled = false },
 			},
+			cmdline = {
+				enabled = true,
+				completion = {
+					menu = { auto_show = true },
+					list = {
+						selection = {
+							preselect = true,
+							auto_insert = true,
+						},
+					},
+				},
+			},
 			sources = {
-				-- Remove 'buffer' if you don't want text completions, by default it's only enabled when LSP returns no items
-				default = { "lazydev", "copilot", "lsp", "path", "snippets", "buffer" },
+				default = {
+					"lazydev",
+					"copilot",
+					"lsp",
+					"path",
+					"buffer",
+					"snippets",
+				},
 				providers = {
 					lazydev = {
 						name = "LazyDev",
@@ -132,22 +128,11 @@ return {
 					},
 					copilot = {
 						name = "copilot",
-						module = "blink-cmp-copilot",
+						module = "blink-copilot",
 						score_offset = 100,
 						async = true,
-						transform_items = function(_, items)
-							local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
-							local kind_idx = #CompletionItemKind + 1
-							CompletionItemKind[kind_idx] = "Copilot"
-							for _, item in ipairs(items) do
-								item.kind = kind_idx
-							end
-							return items
-						end,
 					},
 				},
-				-- Disable cmdline completions
-				-- cmdline = {},
 			},
 			appearance = {
 				-- Sets the fallback highlight groups to nvim-cmp's highlight groups
@@ -157,45 +142,10 @@ return {
 				-- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
 				-- Adjusts spacing to ensure icons are aligned
 				nerd_font_variant = "mono",
-				kind_icons = {
-					Copilot = "",
-					Text = "󰉿",
-					Method = "󰊕",
-					Function = "󰊕",
-					Constructor = "󰒓",
-
-					Field = "󰜢",
-					Variable = "󰆦",
-					Property = "󰖷",
-
-					Class = "󱡠",
-					Interface = "󱡠",
-					Struct = "󱡠",
-					Module = "󰅩",
-
-					Unit = "󰪚",
-					Value = "󰦨",
-					Enum = "󰦨",
-					EnumMember = "󰦨",
-
-					Keyword = "󰻾",
-					Constant = "󰏿",
-
-					Snippet = "󱄽",
-					Color = "󰏘",
-					File = "󰈔",
-					Reference = "󰬲",
-					Folder = "󰉋",
-					Event = "󱐋",
-					Operator = "󰪚",
-					TypeParameter = "󰬛",
-				},
 			},
-
 			-- Experimental signature help support
 			signature = {
 				enabled = true,
-				window = { border = "rounded" },
 			},
 		},
 		opts_extend = { "sources.default" },

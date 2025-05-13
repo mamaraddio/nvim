@@ -12,4 +12,6 @@ function Utils.luacmd(command, args)
 	end
 end
 
+vim.diagnostic.refresh = function() return vim.diagnostic.is_enabled() and vim.diagnostic.show() end
+
 return Utils

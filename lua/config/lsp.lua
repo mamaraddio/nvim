@@ -11,6 +11,7 @@ vim.diagnostic.config({
 			[vim.diagnostic.severity.HINT] = diagnostics_icons.Information,
 		},
 	},
+	virtual_lines = true,
 	update_in_insert = true,
 	underline = true,
 	severity_sort = true,
@@ -25,19 +26,8 @@ vim.diagnostic.config({
 	},
 })
 
----Identify if a package is an LSP
----@param pkg Package Mason package to check
----@return boolean
-local function is_package_lsp(pkg)
-	local res = false
-	for _, value in ipairs(pkg.spec.categories) do
-		res = res or (value == "LSP")
-	end
-	return res
-end
-
 local registry = require("mason-registry")
-local server_mappings = require("mason-lspconfig.mappings.server")
+local server_mappings = require("mason-lspconfig").get_mappings()
 vim.lsp.config("*", {
 	capabilities = {
 		textDocument = {
@@ -49,7 +39,7 @@ vim.lsp.config("*", {
 	root_markers = { ".git" },
 })
 for _, pkg in pairs(registry.get_installed_packages()) do
-	if is_package_lsp(pkg) then
+	if vim.list_contains(pkg.spec.categories, "LSP") then
 		local server = server_mappings.package_to_lspconfig[pkg.name]
 		local require_ok, settings = pcall(require, "lspsettings." .. server)
 		if require_ok then vim.lsp.config(server, settings) end
@@ -68,6 +58,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			{ "<leader>li", luacmd(vim.cmd.checkhealth, "vim.lsp"), desc = "LSP Info" },
 			{ "<leader>ll", luacmd(vim.lsp.codelens.run), desc = "CodeLens Action" },
 		})
+
+		if client:supports_method("textDocument/foldingRange", args.buf) then
+			vim.o.foldmethod = "expr"
+			vim.o.foldexpr = "v:lua.vim.lsp.foldexpr()"
+		end
 
 		if client:supports_method("textDocument/inlayHint", args.buf) then
 			vim.lsp.inlay_hint.enable(true, { args.buf })
@@ -101,7 +96,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 		if client:supports_method("textDocument/diagnostics") then
 			wk.add({
-				{ "gl", luacmd(vim.diagnostic.open_float), desc = "Diagnostic Float", options },
+				{
+					"gl",
+					luacmd(vim.diagnostic.open_float),
+					desc = "Diagnostic Float",
+					options,
+				},
 				{ "<leader>lq", luacmd(vim.diagnostic.setloclist), desc = "Quickfix" },
 				{ "<leader>lj", luacmd(vim.diagnostic.jump, { count = 1, float = true }), desc = "Next Diagnostic" },
 				{ "<leader>lk", luacmd(vim.diagnostic.jump, { count = -1, float = true }), desc = "Prev Diagnostic" },
@@ -110,11 +110,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		if client:supports_method("textDocument/formatting") then
 			wk.add({
 				"<leader>lf",
-				luacmd(require("conform").format, {
-					lsp_fallback = true,
-					async = true,
-					timeout_ms = 500,
-				}),
+				luacmd(require("conform").format),
 				desc = "Format file or range (in visual mode)",
 				options,
 			})

@@ -1,11 +1,11 @@
 return {
 	{
-		"williamboman/mason.nvim",
+		"mason-org/mason.nvim",
 		event = { "BufRead", "BufNewFile" },
 		opts = { ui = { border = "rounded" } },
 	},
 	{
-		"williamboman/mason-lspconfig.nvim",
+		"mason-org/mason-lspconfig.nvim",
 		dependencies = { "mason.nvim" },
 		opts = {
 			ensure_installed = {
@@ -19,39 +19,22 @@ return {
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		dependencies = { "mason.nvim", "mfussenegger/nvim-lint", "stevearc/conform.nvim" },
 		opts = function()
-			--- @param input_table table Tabella di input { key = {"a", "b"}, ... }
-			--- @return string[] flattened tabella list-like con valori univoci {"a", "b", ...}
-			local function flatten_valuer(input_table)
-				local seen = {}
-				local unique_list = {}
-				local index = 0 -- Usiamo un indice separato per l'inserimento
+			--[[ local formatters = {}
+			vim.iter(vim.tbl_values(require("conform").formatters_by_ft)):flatten():map(function(formatter)
+				if not vim.list_contains(formatters, formatter) then table.insert(formatters, formatter) end
+			end)
+			local linters = {}
+			vim.iter(vim.tbl_values(require("lint").linters_by_ft)):flatten():map(function(linter)
+				if not vim.list_contains(linters, linter) then table.insert(linters, linter) end
+			end)
 
-				for _, inner_table in pairs(input_table or {}) do -- Usa or {} per gestire nil input
-					if type(inner_table) == "table" then
-						for _, value_string in ipairs(inner_table) do
-							-- Combina controllo e azione
-							if seen[value_string] == nil then -- Verifica esplicita con nil
-								seen[value_string] = true -- Marca come visto
-								index = index + 1
-								unique_list[index] = value_string -- Inserimento diretto tramite indice
-							end
-						end
-					end
-				end
-
-				return unique_list
-			end
-
-			local list = vim.list_extend(
-				flatten_valuer(require("lint").linters_by_ft),
-				flatten_valuer(require("conform").formatters_by_ft)
-			)
-			-- vim.notify(vim.inspect(list), vim.log.levels.INFO)
+			local list = vim.list_extend(formatters, linters)
+			vim.print(list)
 
 			return {
 				ensure_installed = list,
 				auto_update = true,
-			}
+			} ]]
 		end,
 	},
 	{
