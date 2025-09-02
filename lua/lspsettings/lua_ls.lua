@@ -1,25 +1,25 @@
 -- https://luals.github.io/wiki/settings/
 return {
-	settings = {
-		Lua = {
-			completion = { callSnippet = "Both", displayContext = 5, keywordSnippet = "Both" },
-			format = {
-				enable = true,
-				-- defaultConfig = require("lspsettings/lua_format"),
-			},
-			dagnostics = {
-				globals = { "vim" },
-				-- globals = { "vim", "spec" },
-			},
-			runtime = {
-				version = "LuaJIT",
-				-- special = {
-				--   spec = "require",
-				-- },
-			},
-			workspace = {
-				checkThirdParty = false,
-				--[[ library = {
+  settings = {
+    Lua = {
+      completion = { callSnippet = "Both", displayContext = 5, keywordSnippet = "Both" },
+      format = {
+        enable = true,
+        -- defaultConfig = require("lspsettings/lua_format"),
+      },
+      dagnostics = {
+        globals = { "vim", "Snacks" },
+        -- globals = { "vim", "spec" },
+      },
+      runtime = {
+        version = "LuaJIT",
+        -- special = {
+        --   spec = "require",
+        -- },
+      },
+      workspace = {
+        checkThirdParty = false,
+        --[[ library = {
 					vim.api.nvim_get_runtime_file("", true),
 					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
 					[vim.fn.stdpath("config") .. "/lua"] = true,
@@ -28,17 +28,17 @@ return {
 					maxPreload = 100000,
 					preloadFileSize = 10000,
 				}, ]]
-			},
-			hint = {
-				enable = true,
-				arrayIndex = "Disable", -- "Enable" | "Auto" | "Disable"
-				await = true,
-				paramName = "All", -- "All" | "Literal" | "Disable"
-				paramType = true,
-				semicolon = "SameLine", -- "All" | "SameLine" | "Disable"
-				setType = false,
-			},
-			telemetry = { enable = false },
-		},
-	},
+      },
+      hint = {
+        enable = true,
+        arrayIndex = "Disable", -- "Enable" | "Auto" | "Disable"
+        await = true,
+        paramName = "All",      -- "All" | "Literal" | "Disable"
+        paramType = true,
+        semicolon = "SameLine", -- "All" | "SameLine" | "Disable"
+        setType = false,
+      },
+      telemetry = { enable = false },
+    },
+  },
 }
