@@ -60,8 +60,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		})
 
 		if client:supports_method("textDocument/foldingRange", args.buf) then
-			vim.o.foldmethod = "expr"
-			vim.o.foldexpr = "v:lua.vim.lsp.foldexpr()"
+			vim.wo.foldmethod = "expr"
+			vim.wo.foldexpr = "v:lua.vim.lsp.foldexpr()"
 		end
 
 		if client:supports_method("textDocument/inlayHint", args.buf) then
