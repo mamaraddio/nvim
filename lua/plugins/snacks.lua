@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 return {
 	"folke/snacks.nvim",
 	priority = 1000,
@@ -7,12 +8,8 @@ return {
 			pattern = "VeryLazy",
 			callback = function()
 				-- Setup some globals for debugging (lazy-loaded)
-				_G.dd = function(...)
-					Snacks.debug.inspect(...)
-				end
-				_G.bt = function()
-					Snacks.debug.backtrace()
-				end
+				_G.dd = function(...) Snacks.debug.inspect(...) end
+				_G.bt = function() Snacks.debug.backtrace() end
 				vim.print = _G.dd -- Override print to use snacks for `:=` command
 
 				-- Create some toggle mappings
@@ -41,9 +38,7 @@ return {
 			callback = function(ev)
 				local client = vim.lsp.get_client_by_id(ev.data.client_id)
 				local value = ev.data.params.value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
-				if not client or type(value) ~= "table" then
-					return
-				end
+				if not client or type(value) ~= "table" then return end
 				local p = progress[client.id]
 
 				for i = 1, #p + 1 do
@@ -62,9 +57,7 @@ return {
 				end
 
 				local msg = {} ---@type string[]
-				progress[client.id] = vim.tbl_filter(function(v)
-					return table.insert(msg, v.msg) or not v.done
-				end, p)
+				progress[client.id] = vim.tbl_filter(function(v) return table.insert(msg, v.msg) or not v.done end, p)
 
 				local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
 				vim.notify(table.concat(msg, "\n"), "info", {
@@ -80,9 +73,14 @@ return {
 
 		vim.api.nvim_create_autocmd("User", {
 			pattern = "MiniFilesActionRename",
-			callback = function(event)
-				Snacks.rename.on_rename_file(event.data.from, event.data.to)
-			end,
+			callback = function(event) Snacks.rename.on_rename_file(event.data.from, event.data.to) end,
+		})
+		require("which-key").add({
+			{
+				"<leader>e",
+				require("snacks.explorer").open,
+				desc = "Toggle file explorer",
+			},
 		})
 	end,
 	---@type snacks.Config
