@@ -1,6 +1,7 @@
 return {
 	"echasnovski/mini.nvim",
-	version = false,
+	-- version = false,
+	version = "*",
 	lazy = false,
 	priority = 900,
 	specs = {
